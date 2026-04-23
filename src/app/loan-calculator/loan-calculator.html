@@ -1,0 +1,92 @@
+<div class="container">
+    <mat-card class="loan-card">
+        <mat-card-header class="loan-header">
+            <mat-card-title class="gradient-text">Loan Interest Calculator</mat-card-title>
+        </mat-card-header>
+
+        <mat-card-content>
+            <form>
+                <mat-form-field appearance="outline" class="full-width">
+                    <mat-label>Loan Amount</mat-label>
+                    <input matInput type="number" [(ngModel)]="loanAmount" (ngModelChange)="calculateSchedule()" name="amount" required min="1000">
+                </mat-form-field>
+
+                <mat-form-field appearance="outline" class="full-width">
+                    <mat-label>Interest Rate (%)</mat-label>
+                    <input matInput type="number" [(ngModel)]="interestRate" (ngModelChange)="calculateSchedule()" name="rate" required min="1">
+                </mat-form-field>
+
+                <mat-form-field appearance="outline" class="full-width">
+                    <mat-label>Tenure (months)</mat-label>
+                    <input matInput type="number" [(ngModel)]="tenure" (ngModelChange)="calculateSchedule()" name="tenure" required min="1">
+                </mat-form-field>
+
+                <mat-form-field appearance="outline" class="full-width">
+                    <mat-label>Currency</mat-label>
+                    <mat-select [(value)]="currency">
+                        <mat-option value="INR">₹ INR</mat-option>
+                        <mat-option value="USD">$ USD</mat-option>
+                        <mat-option value="EUR">€ EUR</mat-option>
+                    </mat-select>
+                </mat-form-field>
+            </form>
+
+            <mat-divider class="gradient-divider"></mat-divider>
+
+            <div class="summary-row">
+                <span class="summary-label">Monthly EMI:</span>
+                <span class="summary-value">{{ emi | currency:currency:'symbol':'1.2-2' }}</span>
+            </div>
+            <div class="summary-row">
+                <span class="summary-label">Principal Amount:</span>
+                <span class="summary-value">{{ loanAmount | currency:currency:'symbol':'1.2-2' }}</span>
+            </div>
+            <div class="summary-row">
+                <span class="summary-label">Total Interest:</span>
+                <span class="summary-value">{{ totalInterest | currency:currency:'symbol':'1.2-2'
+                    }}</span>
+            </div>
+            <div class="summary-row">
+                <span class="summary-label">Total Payment:</span>
+                <span class="summary-value">{{ totalPayment | currency:currency:'symbol':'1.2-2' }}</span>
+            </div>
+
+            <!-- <button mat-raised-button color="primary" (click)="calculateSchedule()">Show Repayment Schedule</button> -->
+            <button mat-raised-button color="primary" class="full-width-btn" (click)="toggleSchedule()">
+                {{ showSchedule ? 'Hide Repayment Schedule' : 'Show Repayment Schedule' }}
+            </button>
+
+            <!-- <mat-slide-toggle (change)="toggleDarkMode($event)">Dark Mode</mat-slide-toggle> -->
+
+
+            <div *ngIf="showSchedule">
+                <mat-card class="schedule-card">
+                    <mat-card-title class="">Repayment Schedule</mat-card-title>
+                    <table mat-table [dataSource]="repaymentSchedule" class="mat-elevation-z2 full-width">
+                        <ng-container matColumnDef="month">
+                            <th mat-header-cell *matHeaderCellDef>Month</th>
+                            <td mat-cell *matCellDef="let row">{{ row.month }}</td>
+                        </ng-container>
+                        <ng-container matColumnDef="principal">
+                            <th mat-header-cell *matHeaderCellDef>Principal</th>
+                            <td mat-cell *matCellDef="let row">{{ row.principal | currency:currency:'symbol':'1.2-2' }}
+                            </td>
+                        </ng-container>
+                        <ng-container matColumnDef="interest">
+                            <th mat-header-cell *matHeaderCellDef>Interest</th>
+                            <td mat-cell *matCellDef="let row">{{ row.interest | currency:currency:'symbol':'1.2-2' }}
+                            </td>
+                        </ng-container>
+                        <ng-container matColumnDef="balance">
+                            <th mat-header-cell *matHeaderCellDef>Balance</th>
+                            <td mat-cell *matCellDef="let row">{{ row.balance | currency:currency:'symbol':'1.2-2' }}
+                            </td>
+                        </ng-container>
+                        <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
+                        <tr mat-row *matRowDef="let row; columns: displayedColumns;"></tr>
+                    </table>
+                </mat-card>
+            </div>
+        </mat-card-content>
+    </mat-card>
+</div>

@@ -1,0 +1,78 @@
+.container {
+  display: flex;
+  justify-content: center;
+  margin-top: 30px;
+}
+
+.loan-card {
+  width: 500px;
+  padding-bottom: 20px;
+}
+
+.full-width {
+  width: 100%;
+  margin-bottom: 5px;
+}
+
+.summary-row {
+  display: flex;
+  justify-content: space-between;
+  padding: 8px 0;
+  font-size: 1.1rem;
+}
+
+.summary-label {
+  font-weight: 600;
+  color: #1e1e1e;
+}
+
+.summary-value {
+  font-weight: bold;
+  color: #1e1e1e;
+}
+
+.gradient-text {
+  background: linear-gradient(90deg, #673ab7, #ff4081);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+}
+
+.loan-header {  
+  color: linear-gradient(90deg, #673ab7, #ff4081);
+  padding-bottom: 16px;
+  font-size: medium;
+}
+
+.schedule-card {
+  margin-top: 20px;
+}
+
+mat-divider.gradient-divider {
+  border-top: none;
+  height: 2px;
+  background: linear-gradient(to right, #673ab7, #ff4081);
+}
+
+
+.dark-theme {
+  background-color: #121212;
+  color: #e0e0e0;
+}
+
+.dark-theme .mat-card {
+  background-color: #1e1e1e;
+  color: #e0e0e0;
+}
+
+.dark-theme .mat-form-field,
+.dark-theme .mat-input-element {
+  color: #e0e0e0;
+}
+
+
+.full-width-btn {
+  width: 100%;              /* make button span full width */
+  display: flex;            /* use flexbox */
+  justify-content: center;  /* center text horizontally */
+  align-items: center;      /* center text vertically */  
+}
